@@ -12,13 +12,7 @@ interface DeleteTweetPayload {
   authorId: string;
 }
 
-const s3Client = new S3Client({
-  region: "ap-south-1",
-  credentials: {
-    accessKeyId: "AKIAXYKJWSLBZL44F57U",
-    secretAccessKey: "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",
-  },
-});
+const s3Client = new S3Client({});
 
 const queries = {
   getAllTweets: () =>
