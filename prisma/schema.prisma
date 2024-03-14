@@ -23,6 +23,7 @@ model User {
   tweets       Tweet[]
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  Like         Like[]
 }
 
 model Tweet {
@@ -33,4 +34,15 @@ model Tweet {
   authorId      String
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+  Like          Like[]
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  likedBy   User     @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  tweet     Tweet    @relation(fields: [tweetId], references: [id])
+  tweetId   String
 }
