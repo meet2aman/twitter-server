@@ -13,7 +13,7 @@ exports.resolvers = void 0;
 const db_1 = require("../../clients/db");
 const mutations = {
     /// Creating a new like For a tweet by a user ///
-    createLike: (parent, { payload }, ctx) => __awaiter(void 0, void 0, void 0, function* () {
+    createLike: (parent_1, _a, ctx_1) => __awaiter(void 0, [parent_1, _a, ctx_1], void 0, function* (parent, { payload }, ctx) {
         if (!ctx.user)
             throw new Error("You must be logged in");
         // Check if the user has already liked the tweet //
@@ -37,7 +37,7 @@ const mutations = {
         return like;
     }),
     /// deleting existed liked with user and tweet ///
-    deleteLike: (parent, { payload }, ctx) => __awaiter(void 0, void 0, void 0, function* () {
+    deleteLike: (parent_2, _b, ctx_2) => __awaiter(void 0, [parent_2, _b, ctx_2], void 0, function* (parent, { payload }, ctx) {
         if (!ctx.user)
             throw new Error("You must be logged in");
         const like = yield db_1.prismaClient.like.findUnique({

@@ -62,7 +62,7 @@ function initServer() {
         /// Graphql Server Configuration Initing the GQL SERVER  ///
         yield graphqlServer.start();
         app.use("/graphql", (0, express4_1.expressMiddleware)(graphqlServer, {
-            context: ({ req, res }) => __awaiter(this, void 0, void 0, function* () {
+            context: (_a) => __awaiter(this, [_a], void 0, function* ({ req, res }) {
                 return {
                     user: req.headers.authorization
                         ? jwt_1.default.decodeToken(req.headers.authorization)

@@ -17,7 +17,7 @@ const db_1 = require("../../clients/db");
 const axios_1 = __importDefault(require("axios"));
 const jwt_1 = __importDefault(require("../../services/jwt"));
 const queries = {
-    verifyGoogleToken: (parent, { token }) => __awaiter(void 0, void 0, void 0, function* () {
+    verifyGoogleToken: (parent_1, _a) => __awaiter(void 0, [parent_1, _a], void 0, function* (parent, { token }) {
         const googleToken = token;
         const googleOAuthUrl = new URL("https://oauth2.googleapis.com/tokeninfo");
         googleOAuthUrl.searchParams.set("id_token", googleToken);
@@ -49,13 +49,17 @@ const queries = {
         return userToken;
     }),
     getCurrentUser: (parent, args, ctx) => __awaiter(void 0, void 0, void 0, function* () {
-        var _a;
+        var _b;
         // console.log(ctx);
-        const id = (_a = ctx.user) === null || _a === void 0 ? void 0 : _a.id;
+        const id = (_b = ctx.user) === null || _b === void 0 ? void 0 : _b.id;
         if (!id)
             return null;
         const user = yield db_1.prismaClient.user.findUnique({ where: { id } });
         return user;
+    }),
+    getUserById: (parent_2, _c, ctx_1) => __awaiter(void 0, [parent_2, _c, ctx_1], void 0, function* (parent, { id }, ctx) {
+        const userById = yield db_1.prismaClient.user.findUnique({ where: { id } });
+        return userById;
     }),
 };
 const extraResolver = {

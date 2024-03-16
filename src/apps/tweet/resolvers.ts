@@ -3,6 +3,7 @@ import { prismaClient } from "../../clients/db";
 import { GraphqlContext } from "../../interfaces";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+
 interface CreateTweetPayload {
   content: string;
   tweetImageUrl?: string;
@@ -12,7 +13,9 @@ interface DeleteTweetPayload {
   authorId: string;
 }
 
-const s3Client = new S3Client({});
+const s3Client = new S3Client({
+  region:process.env.AWS_DEFAULT_REGION
+});
 
 const queries = {
   getAllTweets: () =>

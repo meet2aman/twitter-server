@@ -14,15 +14,11 @@ const db_1 = require("../../clients/db");
 const client_s3_1 = require("@aws-sdk/client-s3");
 const s3_request_presigner_1 = require("@aws-sdk/s3-request-presigner");
 const s3Client = new client_s3_1.S3Client({
-    region: "ap-south-1",
-    credentials: {
-        accessKeyId: "AKIAXYKJWSLBZL44F57U",
-        secretAccessKey: "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",
-    },
+    region: process.env.AWS_DEFAULT_REGION
 });
 const queries = {
     getAllTweets: () => db_1.prismaClient.tweet.findMany({ orderBy: { createdAt: "desc" } }),
-    getSignedURLForTweet: (parent, { imageName, imageType }, ctx) => __awaiter(void 0, void 0, void 0, function* () {
+    getSignedURLForTweet: (parent_1, _a, ctx_1) => __awaiter(void 0, [parent_1, _a, ctx_1], void 0, function* (parent, { imageName, imageType }, ctx) {
         if (!ctx.user || !ctx.user.id) {
             throw new Error(`You are not authenticated`);
         }
@@ -44,7 +40,7 @@ const queries = {
     }),
 };
 const mutations = {
-    createTweet: (parent, { payload }, ctx) => __awaiter(void 0, void 0, void 0, function* () {
+    createTweet: (parent_2, _b, ctx_2) => __awaiter(void 0, [parent_2, _b, ctx_2], void 0, function* (parent, { payload }, ctx) {
         if (!ctx.user)
             throw new Error("You must be logged in");
         const tweet = yield db_1.prismaClient.tweet.create({
@@ -56,9 +52,9 @@ const mutations = {
         });
         return tweet;
     }),
-    deleteTweet: (parent, { payload }, ctx) => __awaiter(void 0, void 0, void 0, function* () {
-        var _a;
-        console.log((_a = ctx.user) === null || _a === void 0 ? void 0 : _a.id);
+    deleteTweet: (parent_3, _c, ctx_3) => __awaiter(void 0, [parent_3, _c, ctx_3], void 0, function* (parent, { payload }, ctx) {
+        var _d;
+        console.log((_d = ctx.user) === null || _d === void 0 ? void 0 : _d.id);
         if (!ctx.user)
             throw new Error("You must be logged in");
         // Delete the Tweet
